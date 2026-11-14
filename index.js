@@ -5,6 +5,7 @@ const myOrderList = document.getElementById("my-order-list");
 const totalPrice = document.getElementById("total_price");
 
 const total = [];
+const yourOrder = [];
 
 orderSection.classList.toggle("hidden");
 
@@ -44,6 +45,27 @@ menuItems.addEventListener("click", function (event) {
 	const dish = menuArray.find(function (item) {
 		return item.id === id;
 	});
+
+	renderYourOrder(dish);
+	addItemToBasketArray(dish);
+	countTotalPrice(dish);
+	console.log(yourOrder);
+});
+
+function addItemToBasketArray(dish) {
+	yourOrder.push({ name: dish.name, price: dish.price });
+}
+
+function countTotalPrice(dish) {
+	//I need to save the prices into an array to show the total price
+	total.push(Number(dish.price));
+	let prices = total.reduce(function (total, current) {
+		return total + current;
+	});
+	totalPrice.textContent = `$${prices}`;
+}
+
+function renderYourOrder(dish) {
 	const dishDiv = document.createElement("div");
 	dishDiv.classList.add("dish-div");
 	myOrderList.appendChild(dishDiv);
@@ -57,20 +79,37 @@ menuItems.addEventListener("click", function (event) {
 	dishRemove.classList.add("dishRemoveBtn");
 	dishDiv.appendChild(dishRemove);
 	dishRemove.textContent = "remove";
+	dishRemove.dataset.id = dish.id;
+	console.log(dishRemove.dataset.id);
 
 	const dishPrice = document.createElement("span");
 	dishDiv.appendChild(dishPrice);
 	dishPrice.textContent = `$${dish.price}`;
-
-	//I need to save the prices into an array hmm
-	total.push(Number(dish.price));
-	countTotalPrice();
-});
-
-function countTotalPrice() {
-	let prices = total.reduce(function (total, current) {
-		return total + current;
-	});
-	console.log(prices);
-	totalPrice.textContent = `$${prices}`;
 }
+
+function removeItemFromBasketArray(button) {
+	const id = Number(button.dataset.id);
+	console.log(id);
+	const dish = menuArray.find(function (item) {
+		return item.id === id;
+	});
+	yourOrder.splice(`${dish}`, 1);
+	myOrderList.removeChild(button.parentElement);
+}
+
+//listen for clicks for the remove button
+orderSection.addEventListener("click", function (event) {
+	//only do smth if the button is clicked inside the dish-div
+	const button = event.target.closest(".dishRemoveBtn");
+	if (!button) {
+		return;
+	}
+	removeItemFromBasketArray(button);
+	console.log(yourOrder);
+
+	//if it was the last item in the order list, hide the order list:
+	if (yourOrder.length === 0) {
+		orderSection.classList.toggle("hidden");
+		return;
+	}
+});
