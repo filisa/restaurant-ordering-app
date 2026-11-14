@@ -3,10 +3,14 @@ const menuItems = document.getElementById("menu_items");
 const orderSection = document.getElementById("order-section");
 const myOrderList = document.getElementById("my-order-list");
 const totalPrice = document.getElementById("total_price");
+const completeOrder = document.getElementById("complete-order");
+const cardDetailsContainer = document.getElementById("card-details-container");
 
 const total = [];
 const yourOrder = [];
 
+//your Order and section to enter the card details are hidden at the beginning
+// cardDetailsContainer.classList.toggle("hidden");
 orderSection.classList.toggle("hidden");
 
 function renderMenu(arr) {
@@ -112,4 +116,10 @@ orderSection.addEventListener("click", function (event) {
 		orderSection.classList.toggle("hidden");
 		return;
 	}
+});
+
+completeOrder.addEventListener("click", function () {
+	cardDetailsContainer.style.opacity = 1;
+	cardDetailsContainer.style.zIndex = 100;
+	window.scrollTo(0, 0);
 });
