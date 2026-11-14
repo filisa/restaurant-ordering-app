@@ -1,0 +1,120 @@
+body,
+html {
+	margin: 0;
+	padding: 0;
+	background-color: var(--background);
+	font-size: 2rem;
+	color: rgb(46, 45, 45);
+}
+
+:root {
+	background: #f5f5f5;
+}
+
+.header {
+	width: 100%;
+	height: auto;
+}
+
+.menu_items {
+	font-family: "Smythe", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	width: 80%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 2vw;
+	margin: 2vw;
+}
+
+.menu_item {
+	display: flex;
+	flex-direction: row;
+	height: 40vw;
+	justify-content: space-between;
+}
+
+.emoji {
+	font-size: 7rem;
+	margin-right: 3vw;
+	align-self: center;
+}
+
+.dish_name {
+	font-size: 2rem;
+}
+
+.ingrediants {
+	font-size: 1.2rem;
+	color: gray;
+}
+.price {
+	font-size: 1.5rem;
+}
+
+.smythe-regular {
+	font-family: "Smythe", system-ui;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.plus_button {
+	align-self: center;
+	font-size: 1rem;
+	padding: 2vw;
+	border: 1px solid gray;
+	border-radius: 50%;
+}
+
+.plus_button:hover {
+	border: 1.1px solid rgb(52, 50, 50);
+}
+
+.plus_button:active {
+	box-shadow: 2px 2px 5px #424141;
+}
+
+.complete-order {
+	font-size: 1rem;
+	padding: 2vw;
+	border: none;
+	background-color: #16db99;
+	width: 100%;
+	margin-top: 8vw;
+	color: white;
+}
+
+.order-section {
+	font-family: "Smythe", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	padding: 2vw;
+	margin: 2vw;
+}
+
+.hidden {
+	display: none;
+}
+
+h3 {
+	text-align: center;
+	font-weight: 200;
+}
+
+.dish-div {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.dishRemoveBtn {
+	border: none;
+	width: 100px;
+	background-color: transparent;
+	justify-self: flex-start;
+	font-size: 1rem;
+	color: gray;
+}
+
+.total-price {
+	display: flex;
+	justify-content: space-between;
+}
