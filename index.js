@@ -5,10 +5,11 @@ const myOrderList = document.getElementById("my-order-list");
 const totalPrice = document.getElementById("total_price");
 const completeOrder = document.getElementById("complete-order");
 const cardDetailsContainer = document.getElementById("card-details-container");
+const pay = document.getElementById("pay");
 
-const total = [];
+let total = [];
 const yourOrder = [];
-
+console.log(total);
 //your Order and section to enter the card details are hidden at the beginning
 // cardDetailsContainer.classList.toggle("hidden");
 orderSection.classList.toggle("hidden");
@@ -52,7 +53,7 @@ menuItems.addEventListener("click", function (event) {
 
 	renderYourOrder(dish);
 	addItemToBasketArray(dish);
-	countTotalPrice(dish);
+	countTotalPrice();
 	console.log(yourOrder);
 });
 
@@ -60,9 +61,19 @@ function addItemToBasketArray(dish) {
 	yourOrder.push({ name: dish.name, price: dish.price });
 }
 
-function countTotalPrice(dish) {
+function countTotalPrice() {
+	total = [];
+
 	//I need to save the prices into an array to show the total price
-	total.push(Number(dish.price));
+	for (let i = 0; i < yourOrder.length; i++) {
+		console.log("your order", yourOrder);
+		let priceItem = yourOrder[i].price;
+		total.push(Number(priceItem));
+	}
+	console.log("total:", total);
+	if (total.length === 0) {
+		return;
+	}
 	let prices = total.reduce(function (total, current) {
 		return total + current;
 	});
@@ -98,7 +109,9 @@ function removeItemFromBasketArray(button) {
 		return item.id === id;
 	});
 	yourOrder.splice(`${dish}`, 1);
+	countTotalPrice();
 	myOrderList.removeChild(button.parentElement);
+	return dish.price;
 }
 
 //listen for clicks for the remove button
@@ -110,7 +123,6 @@ orderSection.addEventListener("click", function (event) {
 	}
 	removeItemFromBasketArray(button);
 	console.log(yourOrder);
-
 	//if it was the last item in the order list, hide the order list:
 	if (yourOrder.length === 0) {
 		orderSection.classList.toggle("hidden");
@@ -122,4 +134,9 @@ completeOrder.addEventListener("click", function () {
 	cardDetailsContainer.style.opacity = 1;
 	cardDetailsContainer.style.zIndex = 100;
 	window.scrollTo(0, 0);
+});
+
+pay.addEventListener("click", function () {
+	cardDetailsContainer.style.opacity = 0;
+	cardDetailsContainer.style.zIndex = -1000;
 });

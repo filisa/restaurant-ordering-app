@@ -126,6 +126,7 @@ h3 {
 .total-price {
 	display: flex;
 	justify-content: space-between;
+	height: 15vw;
 }
 
 #card-details-container,
