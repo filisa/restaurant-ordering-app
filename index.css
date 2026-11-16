@@ -151,3 +151,10 @@ input {
 	padding: 2vw;
 	margin: 1vw;
 }
+
+.success-message {
+	z-index: 1000;
+	padding: 6vw;
+	background-color: #5add638d;
+	border-radius: 20px;
+}

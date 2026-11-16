@@ -6,6 +6,9 @@ const totalPrice = document.getElementById("total_price");
 const completeOrder = document.getElementById("complete-order");
 const cardDetailsContainer = document.getElementById("card-details-container");
 const pay = document.getElementById("pay");
+const name = document.getElementById("name");
+const cardNumber = document.getElementById("card-number");
+const cvv = document.getElementById("cvv");
 
 let total = [];
 const yourOrder = [];
@@ -136,7 +139,21 @@ completeOrder.addEventListener("click", function () {
 	window.scrollTo(0, 0);
 });
 
-pay.addEventListener("click", function () {
-	cardDetailsContainer.style.opacity = 0;
-	cardDetailsContainer.style.zIndex = -1000;
+pay.addEventListener("click", function (e) {
+	e.preventDefault();
+	if (
+		cardNumber.value.trim() !== "" &&
+		name.value.trim() !== "" &&
+		cvv.value.trim() !== ""
+	) {
+		cardDetailsContainer.style.opacity = 0;
+		cardDetailsContainer.style.zIndex = -1000;
+		const successMessage = document.createElement("p");
+		successMessage.classList.add("success-message");
+		successMessage.textContent = `Thanks, ${name.value.trim()}! Your order is on its way!`;
+		menuItems.appendChild(successMessage);
+		orderSection.classList.toggle("hidden");
+	} else {
+		return;
+	}
 });
